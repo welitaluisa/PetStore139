@@ -1,0 +1,29 @@
+# Ignorar arquivos de compilação e saída
+bin/
+obj/
+
+# Ignorar arquivos de dependências
+packages/
+
+# Ignorar arquivos de configuração de ambiente
+*.user
+*.suo
+*.sln.docstates
+
+# Ignorar arquivos de compilação
+*.dll
+*.pdb
+*.exe
+
+# Ignorar arquivos temporários
+[Tt]humbs.db
+*.DS_Store
+
+# Ignorar arquivos de log e arquivos de saída
+*.log
+*.log.*
+*.json
+
+# Ignorar arquivos do Visual Studio
+.vscode/
+.vs/
