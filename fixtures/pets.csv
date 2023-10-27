@@ -1,0 +1,3 @@
+petId,categoryId,categoryName,petName,photoUrls,tagsIds,tagsNames,status
+940803894,1,dog,Nina,,1;2,vacinado;castrado,avaibable
+940803897,2,cat,Leticia,,1;3,vacinado;vermifugado,available

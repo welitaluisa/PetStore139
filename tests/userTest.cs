@@ -1,4 +1,5 @@
 // 1- Bibliotecas 
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.Interfaces;
 using Newtonsoft.Json; // dependencia para o JsonConvert
 using RestSharp;
 
@@ -12,6 +13,7 @@ public class userTest
     // 3.1 - Atributos
     // Endereço da API
     private const string BASE_URL = "https://petstore.swagger.io/v2/";
+   // public String token; // Seria uma forma de declaração que não usa o 
     // 3.2 - Funções e Métodos
     [Test, Order(1)]
     public void PostUserTest()
@@ -107,6 +109,37 @@ public class userTest
         Assert.That((int)responseBody.code, Is.EqualTo(200));
         Assert.That(responseBody.type.ToString(), Is.EqualTo("unknown"));
         Assert.That(responseBody.message.ToString(), Is.EqualTo("Lele"));
+    }
+
+    [Test, Order(5)]
+    public void GetUserLoginTest()
+    {
+        // Configura 
+        String username = "Boby";
+        String password = "teste";
+
+        var request = new RestRequest($"user/login?username={username}&password={password}", Method.Get); 
+        var client = new RestClient (BASE_URL);
+        
+        // Executa
+
+        var response =   client.Execute(request);
+
+        // Validar
+        var responseBody = JsonConvert.DeserializeObject<dynamic>(response.Content);
+        Console.WriteLine(responseBody);
+
+        // Valide que na resposta, o staus code é igual ao resultado esperado (200)
+        Assert.That((int)response.StatusCode, Is.EqualTo(200));
+
+         // Valide a estrutura da resposta 
+        Assert.That((int)responseBody.code, Is.EqualTo(200));
+        Assert.That(responseBody.type.ToString(), Is.EqualTo("unknown"));
+        String message = responseBody.message;
+        String token = message.Substring(message.LastIndexOf(":")+1);
+        Console.WriteLine($"Token = {token}");
+        Environment.SetEnvironmentVariable("token", token); 
+       // Assert.That(responseBody.userStatus.ToString(), Is.EqualTo("1"));
     }
 
 
